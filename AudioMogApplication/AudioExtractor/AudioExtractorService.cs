@@ -32,6 +32,9 @@ namespace AudioMog.Application.AudioExtractor
 		
 		public override void Run()
 		{
+			_materialIndexToFileName.Clear();
+			_materialIndexToUserNames.Clear();
+
 			Logger.Log($"Beginning to unpack {FilePathToExtract}!");
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
@@ -193,7 +196,7 @@ namespace AudioMog.Application.AudioExtractor
 					.Where(user => user.MaterialIndex == entry.EntryIndex)
 					.Select(user => user.User.DisplayName);
 				var userNames = string.Join(", ", entryUsers);
-				_materialIndexToUserNames.Add(entry.EntryIndex, userNames);
+				_materialIndexToUserNames[entry.EntryIndex] = userNames;
 			}
 		}
 
